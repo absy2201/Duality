@@ -41,9 +41,10 @@ public class InteractiveObject : MonoBehaviour
         isHeld = true;
         transform.parent = parent;
         transform.position = position;
-        transform.rotation = Quaternion.identity;
+        transform.localRotation = Quaternion.identity;
 
-        rb.isKinematic = true;
+        if (rb != null)
+            rb.isKinematic = true;
     }
 
     public void Dropped()
