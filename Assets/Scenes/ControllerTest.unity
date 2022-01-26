@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeld: 0
-  EnablePhysicsWhenDropped: 0
+  EnablePhysicsWhenDropped: 1
   normalColor: {r: 1, g: 0, b: 0, a: 1}
   abnormalColor: {r: 0, g: 0.034456253, b: 1, a: 1}
 --- !u!65 &787652889

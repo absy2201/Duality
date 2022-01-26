@@ -92,37 +92,33 @@ public class FPS_Controller : MonoBehaviour
 
     void PickupObject()
     {
-        if(Input.GetKeyDown(KeyCode.E) && HeldObject != null)
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            RaycastHit hit;
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+            if(HeldObject == null)
             {
-                Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * hit.distance, Color.yellow);
-                if (hit.transform.gameObject.tag == "Interactable")
+                RaycastHit hit;
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
                 {
-                    Debug.Log("Did Hit");
-
-                    HeldObject = hit.transform.gameObject;
-                    HeldObject.GetComponent<InteractiveObject>().Held(HeldObjectLocation, HeldObjectLocation.position);
-                    
-                    //HeldObject.transform.parent = HeldObjectLocation;
-                    //HeldObject.transform.localRotation = Quaternion.identity;
-                    //HeldObject.transform.position = HeldObjectLocation.position;
-
+                    Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * hit.distance, Color.yellow);
+                    if (hit.transform.gameObject.tag == "Interactable")
+                    {
+                        Debug.Log("Did Hit");
+                        HeldObject = hit.transform.gameObject;
+                        HeldObject.GetComponent<InteractiveObject>().Held(HeldObjectLocation, HeldObjectLocation.position);
+                    }
+                }
+                else
+                {
+                    Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 1000, Color.white);
+                    Debug.Log("Did not Hit");
                 }
             }
             else
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-                Debug.Log("Did not Hit");
+                HeldObject.GetComponent<InteractiveObject>().Dropped();
+                HeldObject = null;
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && HeldObject != null)
-        {
-            HeldObject.GetComponent<InteractiveObject>().Dropped();
-            //HeldObject.transform.parent = null;
-            HeldObject = null;
         }
     }
 }
