@@ -29,9 +29,14 @@ public class GlobalStateController : MonoBehaviour
 
     private void Update()
     {
-        if(menuOpen)
-        {
+        
+    }
 
-        }
+    void ToggleMenu()
+    {
+        menuOpen = !menuOpen;
+
+        if (Menu != null)
+            Menu.SetActive(menuOpen);
     }
 }

@@ -14,9 +14,9 @@ public class ColorObject : InteractiveObject
         gameObject.GetComponent<MeshRenderer>().material.color = normalColor;
     }
 
-    public override void AbnormalState()
+    public override void AlternateState()
     {
-        base.AbnormalState();
+        base.AlternateState();
 
         gameObject.GetComponent<MeshRenderer>().material.color = abnormalColor;
     }

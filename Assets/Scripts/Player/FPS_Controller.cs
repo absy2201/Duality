@@ -20,6 +20,9 @@ public class FPS_Controller : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    public GameObject HeldObject;
+    public Transform HeldObjectLocation;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -33,6 +36,7 @@ public class FPS_Controller : MonoBehaviour
     {
         Movement();
         StateChange();
+        PickupObject();
     }
 
     void Movement()
@@ -83,6 +87,42 @@ public class FPS_Controller : MonoBehaviour
         {
             GlobalStateController.Instance.State = !GlobalStateController.Instance.State;
             Debug.Log("Global State = " + GlobalStateController.Instance.State);
+        }
+    }
+
+    void PickupObject()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && HeldObject != null)
+        {
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+            {
+                Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * hit.distance, Color.yellow);
+                if (hit.transform.gameObject.tag == "Interactable")
+                {
+                    Debug.Log("Did Hit");
+
+                    HeldObject = hit.transform.gameObject;
+                    HeldObject.GetComponent<InteractiveObject>().Held(HeldObjectLocation, HeldObjectLocation.position);
+                    
+                    //HeldObject.transform.parent = HeldObjectLocation;
+                    //HeldObject.transform.localRotation = Quaternion.identity;
+                    //HeldObject.transform.position = HeldObjectLocation.position;
+
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+                Debug.Log("Did not Hit");
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && HeldObject != null)
+        {
+            HeldObject.GetComponent<InteractiveObject>().Dropped();
+            //HeldObject.transform.parent = null;
+            HeldObject = null;
         }
     }
 }
