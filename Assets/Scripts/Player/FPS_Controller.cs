@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-
 public class FPS_Controller : MonoBehaviour
 {
     public float walkingSpeed = 7.5f;
@@ -21,9 +20,6 @@ public class FPS_Controller : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
-    [SerializeField]
-    private bool altState;
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -31,8 +27,6 @@ public class FPS_Controller : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        altState = GlobalStateController.Instance.AlternateState;
     }
 
     void Update()
@@ -87,8 +81,8 @@ public class FPS_Controller : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            GlobalStateController.Instance.AlternateState = !GlobalStateController.Instance.AlternateState;
-            Debug.Log("Alternater State = " + GlobalStateController.Instance.AlternateState);
+            GlobalStateController.Instance.State = !GlobalStateController.Instance.State;
+            Debug.Log("Global State = " + GlobalStateController.Instance.State);
         }
     }
 }

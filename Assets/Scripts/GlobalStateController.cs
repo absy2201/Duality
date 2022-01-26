@@ -9,7 +9,6 @@ public class GlobalStateController : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -20,11 +19,12 @@ public class GlobalStateController : MonoBehaviour
         }
     }
 
-    private bool alternateState = false;
-    public bool AlternateState { get { return alternateState; } set { alternateState = value; } }
+    private bool state = false;
+    public bool State { get { return state; } set { state = value; } }
 
     private bool menuOpen;
     public bool MenuOpen { get { return menuOpen; } set { menuOpen = value; } }
+    
     public GameObject Menu;
 
     private void Update()
