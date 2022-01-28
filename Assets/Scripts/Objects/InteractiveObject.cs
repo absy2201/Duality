@@ -8,10 +8,21 @@ public class InteractiveObject : MonoBehaviour
     public bool EnablePhysicsWhenDropped;
 
     private Rigidbody rb;
+    private Outline outline;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if(TryGetComponent<Outline>(out outline))
+        {
+            outline = GetComponent<Outline>();
+        }
+        else
+        {
+            outline = gameObject.AddComponent<Outline>();
+        }
+        
+        InitOutline();
     }
 
     private void Update()
@@ -57,5 +68,12 @@ public class InteractiveObject : MonoBehaviour
         {
             rb.isKinematic = false;
         }
+    }
+
+    private void InitOutline()
+    {
+        outline.OutlineColor = Color.red;
+        outline.OutlineMode = Outline.Mode.OutlineVisible;
+        outline.OutlineWidth = 5f;
     }
 }

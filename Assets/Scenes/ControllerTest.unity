@@ -306,8 +306,8 @@ GameObject:
   - component: {fileID: 787652891}
   - component: {fileID: 787652890}
   - component: {fileID: 787652889}
-  - component: {fileID: 787652888}
   - component: {fileID: 787652893}
+  - component: {fileID: 787652888}
   m_Layer: 0
   m_Name: Color Object
   m_TagString: Interactable
