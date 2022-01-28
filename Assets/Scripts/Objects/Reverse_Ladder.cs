@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorObject : InteractiveObject
+public class Reverse_Ladder : InteractiveObject
 {
+    [SerializeField] private float rotation_angle;
     [SerializeField] private Color normalColor;
     [SerializeField] private Color abnormalColor;
 
-    private Rigidbody rb;
+    private Rigidbody ladder;
 
+    private void Start()
+    {
+        ladder = GetComponent<Rigidbody>();
+    }
     public override void NormalState()
     {
         base.NormalState();
 
         gameObject.GetComponent<MeshRenderer>().material.color = normalColor;
+        transform.RotateAround(new Vector3(0, 0, 0), Vector3.up, rotation_angle);
     }
 
     public override void AlternateState()
@@ -21,7 +27,5 @@ public class ColorObject : InteractiveObject
         base.AlternateState();
 
         gameObject.GetComponent<MeshRenderer>().material.color = abnormalColor;
-
-
     }
 }
