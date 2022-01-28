@@ -23,11 +23,13 @@ public class InteractiveObject : MonoBehaviour
         }
         
         InitOutline();
+
+        gameObject.tag = "Interactable";
     }
 
     private void Update()
     {
-        if(GlobalStateController.Instance.State)
+        if(!GlobalStateController.Instance.State)
         {
             NormalState();
         }
